@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Test_Template2
+  description: First Repo created with the base template from Backstage
+spec:
+  type: service
+  owner: group:default/admins
+  lifecycle: production
+
