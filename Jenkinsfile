@@ -23,9 +23,9 @@ pipeline {
                     git config --global https.proxy ${GLOBAL_AGENT_HTTPS_PROXY}
                     git clone https://github.com/Andreas-Rieger-BS/Test_Template2.git
                     /cyclonedx-linux-x64 add files --no-input --output-format xml --exclude /.git/** --exclude cyclonedx-linux-x64 --output-file bom.xml --base-path ~/Test_Template2/
-                    mv bom.xml ~/Test_Template2/
-                    cd ~/Test_Template2
-                    git remote set-url origin https://${GITHUB_AUTH}@github.com/${GITHUB_USERNAME}/Test_Template2.git
+                    mv bom.xml Test_Template2/
+                    cd Test_Template2
+                    git remote set-url origin https://${GITHUB_AUTH_TOKEN}@github.com/Andreas-Rieger-BS/Test_Template2.git
                     git push origin
                     cd /var/lib/jenkins/workspace
                 """
