@@ -3,6 +3,11 @@ kind: Component
 metadata:
   name: Test_Template2
   description: First Repo created with the base template from Backstage
+  annotations:
+    github.com/project-slug: Andreas-Rieger/Test_Template2
+    jenkins.io/job-full-name: Test_Template2/main
+    sonarqube.org/project-key: Test_Template2
+    dependencytrack/project-id: Test_Template2
 spec:
   type: service
   owner: group:default/admins
