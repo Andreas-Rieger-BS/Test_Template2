@@ -32,6 +32,8 @@ pipeline {
                     mv bom.xml Test_Template2/
                     cd Test_Template2
                     git remote set-url origin https://$GITHUB_AUTH_TOKEN@github.com/Andreas-Rieger-BS/Test_Template2.git
+                    git add .
+                    git commit -m "add bom.xml file"
                     git push origin
                     cd /var/lib/jenkins/workspace/Test_Template2_main
                 """
