@@ -1,5 +1,10 @@
 pipeline {
     agent any 
+    environment {
+        GLOBAL_AGENT_HTTP_PROXY = credentials('http-proxy')
+        GLOBAL_AGENT_HTTPS_PROXY = credentials('https-proxy')
+        GITHUB_AUTH_TOKEN = credentials('github-token')
+    }
     stages {
         stage('Build') {
             steps {
@@ -19,13 +24,13 @@ pipeline {
         stage('bomBuilder') {
             steps {
                 sh """                
-                    git config --global http.proxy ${GLOBAL_AGENT_HTTP_PROXY}
-                    git config --global https.proxy ${GLOBAL_AGENT_HTTPS_PROXY}
+                    git config --global http.proxy $GLOBAL_AGENT_HTTP_PROXY
+                    git config --global https.proxy $GLOBAL_AGENT_HTTPS_PROXY
                     git clone https://github.com/Andreas-Rieger-BS/Test_Template2.git
                     /cyclonedx-linux-x64 add files --no-input --output-format xml --exclude /.git/** --exclude cyclonedx-linux-x64 --output-file bom.xml --base-path Test_Template2/
                     mv bom.xml Test_Template2/
                     cd Test_Template2
-                    git remote set-url origin https://${GITHUB_AUTH_TOKEN}@github.com/Andreas-Rieger-BS/Test_Template2.git
+                    git remote set-url origin https://$GITHUB_AUTH_TOKEN@github.com/Andreas-Rieger-BS/Test_Template2.git
                     git push origin
                     cd /var/lib/jenkins/workspace
                 """
