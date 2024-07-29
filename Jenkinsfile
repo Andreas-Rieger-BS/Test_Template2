@@ -4,6 +4,7 @@ pipeline {
         GLOBAL_AGENT_HTTP_PROXY = credentials('http-proxy')
         GLOBAL_AGENT_HTTPS_PROXY = credentials('https-proxy')
         GITHUB_AUTH_TOKEN = credentials('github-token')
+        GITHUB_MAIL = credentials('github-mail')
     }
     stages {
         stage('Build') {
@@ -26,6 +27,8 @@ pipeline {
                 sh """                
                     git config --global http.proxy $GLOBAL_AGENT_HTTP_PROXY
                     git config --global https.proxy $GLOBAL_AGENT_HTTPS_PROXY
+                    git config --global user.email $GITHUB_MAIL
+                    git config --global user.name "Andreas Rieger"
                     cd ..
                     git clone https://github.com/Andreas-Rieger-BS/Test_Template2.git
                     /cyclonedx-linux-x64 add files --no-input --output-format xml --exclude /.git/** --exclude cyclonedx-linux-x64 --output-file bom.xml --base-path Test_Template2/
